@@ -5,8 +5,10 @@ class People:
         self.age = age
 
     def change_age(self, new_age):
-        # TODO: скопируйте реализацию метода из предыдущей задачи
-        ...
+        if isinstance(new_age, int) and 1 <= new_age <= 100:
+            self.age = new_age
+        else:
+            print("некорректное значение для возраста")
 
     def full_name(self):
         return f"{self.surname} {self.name}"
@@ -23,8 +25,24 @@ peoples = [
     People("Ольга", "Подгорная", 32),
 ]
 
-# TODO-1: найдите самого молодого человека и выведите его Фамилию и Имя
-#  Примечание: Если самых молодых несколько, выведите любого
+yangest = peoples[0]
+for man in peoples:
+    if man.age < yangest.age:
+        yangest = man
+print(f"Младший:\n{yangest.name} {yangest.surname}")
 
 # TODO-2: найдите всех одногодок и выведите их Фамилии и Имена
 #  Примечание: Если одногодок нет, выведите сообщение "одногодок нет"
+eq_age_people = []
+for man in peoples:
+    eq_age_people = [m for m in peoples if m.age == man.age]
+    if len(eq_age_people) == 1:
+        eq_age_people.clear()
+
+if len(eq_age_people) == 0:
+    print("Одногодков нет")
+else:
+    print("\nОдногодки:")
+    for man in eq_age_people:
+        print(man.name, man.surname)
+        
