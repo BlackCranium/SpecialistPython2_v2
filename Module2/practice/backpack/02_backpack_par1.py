@@ -27,7 +27,7 @@ class BackPack:  # рюкзак
         i = 0
         for item in self.items:
             i += 1
-            print(item.show())
+            print(f"{i}: {item.show()}")
 
 
 # Создаем предметы
