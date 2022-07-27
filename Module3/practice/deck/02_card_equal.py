@@ -1,20 +1,26 @@
 # Начнем с создания карты
+suits = {
+    "Diamonds": ['\u2662', "Бубны"],
+    "Hearts": ['\u2661', "Червы"],
+    "Spades": ['\u2660', "Пики"],
+    "Clubs": ['\u2663', "Трефы"]
+}
+
 class Card:
     def __init__(self, value, suit):
         self.value = value  # Значение карты(2, 3... 10, J, Q, K, A)
         self.suit = suit  # Масть карты
 
     def to_str(self):
-        # TODO-0: скопируйте реализацию метода из предыдущей задачи
-        ...
+        return f"{self.value}{suits[self.suit][0]}"
 
     def equal_suit(self, other_card):
-        # TODO-1: метод возвращает True - если масти карт равны или False - если нет
-        ...
+        return self.suit == other_card.suit
 
 
 # Создадим несколько карт
 card1 = Card("10", "Hearts")
+# card1 = Card("7", "Diamonds")
 card2 = Card("A", "Diamonds")
 
 # Проверим, одинаковые ли масти у карт
