@@ -25,8 +25,8 @@ diamonds_cards = [Card(value=v, suit="Diamonds") for v in reversed(values)]
 print (", ".join([card.to_str() for card in hearts_cards]))
 # print (", ".join([card.to_str() for card in diamonds_cards]))
 
-cards = [
-    Card("2", "Hearts"),
-    Card("3", "Hearts"),
-    Card("4", "Hearts"),
-    ...]
+# cards = [
+#     Card("2", "Hearts"),
+#     Card("3", "Hearts"),
+#     Card("4", "Hearts"),
+#     ...]
