@@ -1,6 +1,16 @@
 from deck_total import Card, Deck
 
-# TODO: Создайте колоду из 52 карт. Перемешайте ее. Вытяните одну карту сверху.
-#   Снова перемешайте колоду и вытяните еще одну. Если вторая карта меньше первой, повторите “перемешать + вытянуть”,
-#   до тех пор, пока не вытяните карту больше предыдущей карты.
-#   В качестве результата выведи все вытягиваемые карты в консоль.
+deck = Deck()
+deck.shuffle()
+card1, = deck.draw(1)
+
+
+def next_card():
+    card, = deck.draw(1)
+    print(str(card), end=" ")
+    return card
+
+
+print(str(card1))
+while next_card() < card1:
+    deck.shuffle()
