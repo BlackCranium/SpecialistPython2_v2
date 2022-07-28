@@ -2,6 +2,7 @@ import random
 
 
 class Card:
+
     def __init__(self, value, suit):
         self.value = value  # Значение карты(2, 3... 10, J, Q, K, A)
         self.suit = suit  # Масть карты
@@ -11,45 +12,28 @@ class Card:
         return f"{self.value}{suit_icons[self.suit]}"
 
     def __str__(self):
-        suit_icons = {"Diamonds": '\u2662', "Hearts": '\u2661', "Spades": '\u2660', "Clubs": '\u2663'}
-        return f"{self.value}{suit_icons[self.suit]}"
+        return self.to_str()
 
     def equal_suit(self, other_card):
         return self.suit == other_card.suit
 
+    def __cost(self):
+        suit_cost = {"Spades": 1, "Clubs": 2, "Diamonds": 3, "Hearts": 4}
+        values_cost = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
+                       'J': 11, 'Q': 12, 'K': 13, 'A': 14}
+        return values_cost[self.value] * 4 + suit_cost[self.suit]
+
     def more(self, other_card):
-        # ♥ > ♦ > ♣ > ♠
-        suit_values = {"Spades": 1, "Clubs": 2, "Diamonds": 3, "Hearts": 4}
-        values_num = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
-                      'J': 11, 'Q': 12, 'K': 13, 'A': 14}
-        if self.value == other_card.value:
-            return suit_values[self.suit] > suit_values[other_card.suit]
-        return values_num[self.value] > values_num[other_card.value]
+        return self.__cost() > other_card.__cost()
 
     def __gt__(self, other):
-        suit_values = {"Spades": 1, "Clubs": 2, "Diamonds": 3, "Hearts": 4}
-        values_num = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
-                      'J': 11, 'Q': 12, 'K': 13, 'A': 14}
-        if self.value == other.value:
-            return suit_values[self.suit] > suit_values[other.suit]
-        return values_num[self.value] > values_num[other.value]
+        return self.more(other)
 
     def less(self, other_card):
-        # ♥ > ♦ > ♣ > ♠
-        suit_values = {"Spades": 1, "Clubs": 2, "Diamonds": 3, "Hearts": 4}
-        values_num = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
-                      'J': 11, 'Q': 12, 'K': 13, 'A': 14}
-        if self.value == other_card.value:
-            return suit_values[self.suit] < suit_values[other_card.suit]
-        return values_num[self.value] < values_num[other_card.value]
+        return self.__cost() < other_card.__cost()
 
     def __lt__(self, other):
-        suit_values = {"Spades": 1, "Clubs": 2, "Diamonds": 3, "Hearts": 4}
-        values_num = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
-                      'J': 11, 'Q': 12, 'K': 13, 'A': 14}
-        if self.value == other.value:
-            return suit_values[self.suit] < suit_values[other.suit]
-        return values_num[self.value] < values_num[other.value]
+        return self.less(other)
 
 
 class Deck:
